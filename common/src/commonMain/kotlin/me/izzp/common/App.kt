@@ -1,21 +1,33 @@
 package me.izzp.common
 
-import androidx.compose.material.Text
-import androidx.compose.material.Button
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
+import kotlinx.coroutines.launch
 
 @Composable
 fun App() {
-    var text by remember { mutableStateOf("Hello, World!") }
-    val platformName = getPlatformName()
-
-    Button(onClick = {
-        text = "Hello, ${platformName}"
-    }) {
-        Text(text)
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scaffoldState = rememberScaffoldState()
+    val coroutineScope = rememberCoroutineScope()
+    Scaffold(
+        scaffoldState = scaffoldState,
+        topBar = {
+            Toolbar(
+                snackbarHostState,
+                onNavIconClick = {
+                    coroutineScope.launch {
+                        scaffoldState.drawerState.open()
+                    }
+                }
+            )
+        },
+        snackbarHost = { SnackbarHost(snackbarHostState) },
+        drawerContent = { AppDrawer() },
+        drawerGesturesEnabled = true,
+    ) {
+        Content()
     }
 }
