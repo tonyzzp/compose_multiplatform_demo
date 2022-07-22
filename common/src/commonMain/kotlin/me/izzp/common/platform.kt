@@ -1,3 +1,9 @@
 package me.izzp.common
 
-expect fun getPlatformName(): String
+
+enum class Platform {
+    Desktop,
+    Android,
+}
+
+expect val currentPlatform: Platform

@@ -19,11 +19,11 @@ dependencies {
 }
 
 android {
-    compileSdkVersion(32)
+    compileSdkVersion(33)
     defaultConfig {
         applicationId = "me.izzp.compose_demo"
         minSdkVersion(24)
-        targetSdkVersion(32)
+        targetSdkVersion(33)
         versionCode = 1
         versionName = "1.0"
     }
@@ -33,7 +33,9 @@ android {
     }
     buildTypes {
         getByName("release") {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
+            signingConfig = signingConfigs.getByName("debug")
         }
     }
 }

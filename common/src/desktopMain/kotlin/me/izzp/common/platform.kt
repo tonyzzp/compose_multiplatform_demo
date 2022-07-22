@@ -1,5 +1,4 @@
 package me.izzp.common
 
-actual fun getPlatformName(): String {
-    return "Desktop"
-}
+
+actual val currentPlatform = Platform.Desktop

@@ -7,10 +7,9 @@ import androidx.compose.runtime.*
 @Composable
 fun Content() {
     var text by remember { mutableStateOf("Hello, World!") }
-    val platformName = getPlatformName()
 
     Button(onClick = {
-        text = "Hello, ${platformName}"
+        text = "Hello, ${currentPlatform}"
     }) {
         Text(text)
     }
